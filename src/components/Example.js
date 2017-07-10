@@ -47,22 +47,21 @@ componentDidMount(){
         hidden={this.state.hidden}
       >
         <TabBar.Item
-          title="生活"
-          key="生活"
+          title="我的设备"
+          key="我的设备"
           icon={<div style={{
             width: '0.44rem',
             height: '0.44rem',
-            background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  0.42rem 0.42rem no-repeat' }}
+            background: 'url(src/assets/img/device.svg) center center /  0.42rem 0.42rem no-repeat' }}
           />
           }
           selectedIcon={<div style={{
             width: '0.44rem',
             height: '0.44rem',
-            background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  0.42rem 0.42rem no-repeat' }}
+            background: 'url(src/assets/img/device-active.svg) center center /  0.42rem 0.42rem no-repeat' }}
           />
           }
           selected={this.state.selectedTab === 'blueTab'}
-          badge={1}
           onPress={() => {
             this.setState({
               selectedTab: 'blueTab',
@@ -70,14 +69,21 @@ componentDidMount(){
           }}
           data-seed="logId"
         >
-          {this.renderContent('生活')}
+          {this.renderContent('我的设备')}
         </TabBar.Item>
         <TabBar.Item
-          icon={<Icon type="koubei-o" size="md" />}
-          selectedIcon={<Icon type="koubei" size="md" />}
-          title="口碑"
-          key="口碑"
-          badge={'new'}
+          icon={<div style={{
+            width: '0.44rem',
+            height: '0.44rem',
+            background: 'url(src/assets/img/msg.svg) center center /  0.42rem 0.42rem no-repeat' }}
+          />}
+          selectedIcon={<div style={{
+            width: '0.44rem',
+            height: '0.44rem',
+            background: 'url(src/assets/img/msg-active.svg) center center /  0.42rem 0.42rem no-repeat' }}
+          />}
+          title="消息中心"
+          key="消息中心"
           selected={this.state.selectedTab === 'redTab'}
           onPress={() => {
             this.setState({
@@ -86,26 +92,25 @@ componentDidMount(){
           }}
           data-seed="logId1"
         >
-          {this.renderContent('口碑')}
+          {this.renderContent('消息中心')}
         </TabBar.Item>
         <TabBar.Item
           icon={
             <div style={{
               width: '0.44rem',
               height: '0.44rem',
-              background: 'url(https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg) center center /  0.42rem 0.42rem no-repeat' }}
+              background: 'url(src/assets/img/my.svg) center center /  0.42rem 0.42rem no-repeat' }}
             />
           }
           selectedIcon={
             <div style={{
               width: '0.44rem',
               height: '0.44rem',
-              background: 'url(https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg) center center /  0.42rem 0.42rem no-repeat' }}
+              background: 'url(src/assets/img/my-active.svg) center center /  0.42rem 0.42rem no-repeat' }}
             />
           }
-          title="朋友"
-          key="朋友"
-          dot
+          title="个人中心"
+          key="个人中心"
           selected={this.state.selectedTab === 'greenTab'}
           onPress={() => {
             this.setState({
@@ -113,21 +118,7 @@ componentDidMount(){
             });
           }}
         >
-          {this.renderContent('朋友')}
-        </TabBar.Item>
-        <TabBar.Item
-          icon={{ uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' }}
-          selectedIcon={{ uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' }}
-          title="我的"
-          key="我的"
-          selected={this.state.selectedTab === 'yellowTab'}
-          onPress={() => {
-            this.setState({
-              selectedTab: 'yellowTab',
-            });
-          }}
-        >
-          {this.renderContent('我的')}
+          {this.renderContent('个人中心')}
         </TabBar.Item>
       </TabBar>
     );
