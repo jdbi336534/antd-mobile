@@ -8,6 +8,7 @@
     "babel-plugin-import": "^1.1.0",
     "dva": "~1.1.0",
     "fastclick": "^1.0.6",
+    "src": "^1.1.2",
     "wysihtml": "^0.6.0-beta1"
   },
   "devDependencies": {

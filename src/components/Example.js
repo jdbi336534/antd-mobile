@@ -1,6 +1,7 @@
 import React from 'react';
-import { TabBar, Icon } from 'antd-mobile';
-
+import { Popover,NavBar,TabBar, Icon } from 'antd-mobile';
+import Devices from './Devices';
+const Item = Popover.Item;
 /* eslint global-require: 0 */
 
 class Example extends React.Component {
@@ -8,43 +9,89 @@ class Example extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'redTab',
-      hidden: false,
+      selectedTab: 'blueTab',
+      navname:'我的设备',
+      visible: false,
+      selected: '',
     };
   }
-componentWillMount(){
-  console.log('componentWillMount:',window.et_cloud);
-}
-componentDidMount(){
-//  let a=require('../assets/js/ilink-js-sdk.min');
-   console.log('et_cloud:',window.et_cloud);
-}
-  renderContent(pageText) {
+  onSelect = (opt) => {
+    // console.log(opt.props.value);
+    this.setState({
+      visible: false,
+      selected: opt.props.value,
+    });
+  }
+  handleVisibleChange = (visible) => {
+    this.setState({
+      visible,
+    });
+  }
+  handleClick=(checked)=>{
+console.info(checked);
+  }
+  renderDevices=()=>{
+    return (
+     <Devices onChange={this.handleClick}/>
+    );
+  }
+  renderContent=(pageText)=> {
     return (
       <div style={{ backgroundColor: 'white', height: '100%', textAlign: 'center' }}>
         <div style={{ paddingTop: 60 }}>你已点击“{pageText}” tab， 当前展示“{pageText}”信息</div>
-        <a style={{ display: 'block', marginTop: 40, marginBottom: 600, color: '#108ee9' }}
-          onClick={(e) => {
-            console.log('et_cloud:', et_cloud);
-            e.preventDefault();
-            this.setState({
-              hidden: !this.state.hidden,
-            });
-          }}
-        >
-          点击切换 tab-bar 显示/隐藏
-        </a>
       </div>
     );
   }
 
   render() {
+     let offsetX = -10; // just for pc demo
+    if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
+      offsetX = -26;
+    }
     return (
+      <div>
+         <NavBar iconName={false}
+        mode="light"
+        rightContent={
+          <Popover mask
+            overlayClassName="fortest"
+            overlayStyle={{ color: 'currentColor' }}
+            visible={this.state.visible}
+            overlay={[
+              (<Item key="4" value="scan" icon={<Icon type={require('../assets/img/scan.svg')} size="xs" />} data-seed="logId">扫码绑定设备</Item>),
+              (<Item key="5" value="special" icon={<Icon type="search" size="xs" />} style={{ whiteSpace: 'nowrap' }}>待定</Item>),
+              (<Item key="6" value="button ct" icon={<Icon type="search" size="xs" />}>
+                <span style={{ marginRight: 5 }}>待定</span>
+              </Item>),
+            ]}
+            align={{
+              overflow: { adjustY: 0, adjustX: 0 },
+              offset: [offsetX, 15],
+            }}
+            onVisibleChange={this.handleVisibleChange}
+            onSelect={this.onSelect}
+          >
+            <div style={{
+              height: '100%',
+              padding: '0 0.3rem',
+              marginRight: '-0.3rem',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+            >
+              <Icon type="ellipsis" />
+            </div>
+          </Popover>
+          }
+      >
+       {this.state.navname}
+      </NavBar>
+
+     
       <TabBar
         unselectedTintColor="#949494"
         tintColor="#33A3F4"
         barTintColor="white"
-        hidden={this.state.hidden}
       >
         <TabBar.Item
           title="我的设备"
@@ -65,11 +112,12 @@ componentDidMount(){
           onPress={() => {
             this.setState({
               selectedTab: 'blueTab',
+              navname:'我的设备'
             });
           }}
           data-seed="logId"
         >
-          {this.renderContent('我的设备')}
+          {this.renderDevices('我的设备')}
         </TabBar.Item>
         <TabBar.Item
           icon={<div style={{
@@ -88,6 +136,7 @@ componentDidMount(){
           onPress={() => {
             this.setState({
               selectedTab: 'redTab',
+              navname:'消息中心'
             });
           }}
           data-seed="logId1"
@@ -115,14 +164,16 @@ componentDidMount(){
           onPress={() => {
             this.setState({
               selectedTab: 'greenTab',
+              navname:'个人中心'
             });
           }}
         >
           {this.renderContent('个人中心')}
         </TabBar.Item>
       </TabBar>
+       </div>
     );
-  }
+  };
 }
 
 export default Example;
